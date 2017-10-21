@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NumberFun</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<style type="text/css">
+		body{
+			background-color: Azure;
+		}
+		button{
+			height: 70vh;
+			margin: 20px;
+		}
+
+	</style>
+</head>
+<body>
+	
+	<div class="container">
+		<div class="row">
+			<h1 id="level" class="text-center col"></h1>
+		</div>
+		<div class="row">
+			<button onclick="query()" class="btn btn-success col" id="query"> Query </button>
+			<button onclick="test()" class="btn btn-danger col" id="test"> Test </button>
+		</div>
+	</div>
+
+	<script src="levels.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
