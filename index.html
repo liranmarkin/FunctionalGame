@@ -1,31 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>NumberFun</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<title>Input / Output Math Game</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 	<style type="text/css">
 		body{
 			background-color: Azure;
+			text-align: center;
 		}
-		button{
+		div{
+			display:inline-block;
+		}
+		.row{
+			margin: 20px 10px;
+		}
+		/* button{
 			height: 70vh;
 			margin: 20px;
-		}
-
+		} */
 	</style>
 </head>
 <body>
-	
 	<div class="container">
 		<div class="row">
 			<h1 id="level" class="text-center col"></h1>
+			<button onclick="reset()" class="btn btn-danger" span="font-size: 10px"> Reset progress </button>
 		</div>
 		<div class="row">
-			<button onclick="query()" class="btn btn-success col" id="query"> Query </button>
-			<button onclick="test()" class="btn btn-danger col" id="test"> Test </button>
+			<div id="query" class="col"> 
+				<input id="input" type="number" placeholder="Input number" />
+				<button onclick="query()" class="btn btn-info"> Query </button> 
+			</div>
+			<div id="test" class="col">
+				<button onclick="test()" class="btn btn-success"> Take Test </button> 
+			</div>
+		</div>
+		<div id="message-list">
+			
 		</div>
 	</div>
 
+	<script
+		src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
 	<script src="levels.js"></script>
 	<script src="main.js"></script>
 </body>
