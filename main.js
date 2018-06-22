@@ -1,18 +1,16 @@
 
-const number_prompt = message => parseFloat( prompt(message) )
-
-const ask = (input) => number_prompt(`Input = ${input}\nOutput = `)
-
-const test_level = (level) => {
-	const func = level.func
-
-	for (const input of level.tests)
-	if (func(input) != ask(input))
-		return false
-
-	return true
+function number_prompt(message)
+{
+	return parseFloat( prompt(message) )
 }
-const write_message = (message) => {
+
+function ask(input)
+{
+	return number_prompt(`Input = ${input}\nOutput = `)
+}
+
+function write_message(message)
+{
 	const message_element =
 		`<div class="row alert alert-primary" role="alert">
 			<h2>${message}</h2>
@@ -20,24 +18,25 @@ const write_message = (message) => {
 	$("#message-list").prepend(message_element)
 }
 
-const clear_message = () => $("#message-list").empty()
-
-const query_level = (level) => {
-	const input = parseFloat($("#input").val())
-	if (isNaN(input)) 					  write_message("Input must be a number!")
-	else if (level.tests.includes(input)) write_message("Can't ask it, it is in the test!")
-	else 								  write_message(`Input = ${input} | Output = ${level.func(input)}`)
+function clear_message()
+{
+	$("#message-list").empty()
 }
 
-const show_examples = (level) => {
-	const func = level.func
-	for (const input of level.examples)
-		write_message(`Input = ${input} | Output = ${level.func(input)}`)
-}
+function set_level(new_level, callback = () => {})
+{
+	function show_examples(level)
+	{
+		const func = level.func
+		for (const input of level.examples)
+			write_message(`Input = ${input} | Output = ${level.func(input)}`)
+	}
 
-const set_level_header = (level_ind) => $("#level").html(`Level: ${level_ind}`)
+	function set_level_header(level_ind)
+	{
+		$("#level").html(`Level: ${level_ind}`)
+	}
 
-const set_level = (new_level, callback = () => {}) => {
 	level_ind = new_level
 	set_level_header(new_level)
 	localStorage.setItem("level", new_level)
@@ -47,7 +46,8 @@ const set_level = (new_level, callback = () => {}) => {
 		show_examples(levels[level_ind])
 }
 
-const check_level = (level_ind) => {
+function check_level(level_ind)
+{
 	if(level_ind >= levels.length){
 		write_message("Reached highest level!")
 		return false
@@ -55,27 +55,55 @@ const check_level = (level_ind) => {
 	return true
 }
 
-const test = () => {
+// used by 'take test' button
+function test()
+{
+	function test_level(level)
+	{
+		const func = level.func
+
+		for (const input of level.tests)
+		if (func(input) != ask(input))
+			return false
+
+		return true
+	}
+
 	if (!check_level(level_ind)) return
 
-	if (test_level(levels[level_ind])){
-		set_level(level_ind + 1, () => write_message("You passed the test! :)"))
+	const level = levels[level_ind]
+	if (test_level(level)) {
+		set_level(level_ind + 1, () => write_message(`You passed the test :)<br />The last function was: ${level.info}`))
 	} else {
 		write_message("You failed the test :(")
 	}
 }
 
-const query = () => {
+// used by 'query' button
+function query()
+{
+	function query_level(level)
+	{
+		const input = parseFloat($("#input").val())
+		if (isNaN(input)) 					  write_message("Input must be a number!")
+		else if (level.tests.includes(input)) write_message("Can't ask it, it is in the test!")
+		else 								  write_message(`Input = ${input} | Output = ${level.func(input)}`)
+	}
+
 	check_level(level_ind) && query_level(levels[level_ind])
 	$("#input").val("")
 }
 
-const reset = () => {
+// used by 'reset progress' button
+function reset()
+{
 	if (confirm("Are you sure you want to reset your progress?")){
-		localStorage.setItem("level", 0)
-		location.reload()
+		set_level(0)
 	}
 }
+
+
+// initialize page
 
 let level_ind = 0;
 $(document).ready(() => {
