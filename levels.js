@@ -156,13 +156,13 @@ const levels = [
 		func: math.sin,
 		examples: [0, 0.11, -0.52, math.pi],
 		tests: [math.pi / 2, -2],
-		info: "Sin"
+		info: "Sine"
 	},
 	{
 		func: math.cos,
 		examples: [0, 0.11, -0.52, math.pi],
 		tests: [math.pi / 2, -2],
-		info: "Cosin"
+		info: "Cosine"
 	},
 	{
 		func: (x) => math.combinations(2 * x, x) / (x + 1),
