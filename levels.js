@@ -1,18 +1,18 @@
 /*
 	ideas:	
-		1/n with 3 digits accuracy. TODO: add approximate answer
-		log
 		primes
-		sin -> trigonometric functions
 		number of on bits in binray representation
 
 	add generic function, more parameters:
 		x, y => x * y
 		x, y => x + y
+		x, y => x xor y
 		string => length
+		string => every letter doubles (stutter 2)
 
 	check if input is valid using function, different options
 */
+
 // memoize utility. TODO: make it decorator
 function memoize(func)
 {
@@ -69,6 +69,12 @@ const levels = [
 		info: "Absolute value"
 	},
 	{
+		func: (x) => x / 4,
+		examples: [1, 6, 12],
+		tests: [16, 22, 25],
+		info: "Divide by 4"
+	},
+	{
 		func: math.floor,
 		examples: [12.521, -23.7],
 		tests: [-4.58, 5.926, 19],
@@ -97,6 +103,12 @@ const levels = [
 		examples: [4, 6],
 		tests: [10, 12],
 		info: "Triangular numbers"
+	},
+	{
+		func: (x) => 1 / x,
+		examples: [1, 8, 100],
+		tests: [50, 20, 6, 0.25],
+		info: "1/x"
 	},
 	{
 		func: (x) => math.pow(2, x),
@@ -133,6 +145,24 @@ const levels = [
 		examples: [6, 91, 7901],
 		tests: [57, 82691, 1111111],
 		info: "Sum of digits"
+	},
+	{
+		func: math.log10,
+		examples: [42, 64, 100],
+		tests: [1000, 87, 12345],
+		info: "Log in base of 10"
+	},
+	{
+		func: math.sin,
+		examples: [0, 0.11, -0.52, math.pi],
+		tests: [math.pi / 2, -2],
+		info: "Sin"
+	},
+	{
+		func: math.cos,
+		examples: [0, 0.11, -0.52, math.pi],
+		tests: [math.pi / 2, -2],
+		info: "Cosin"
 	},
 	{
 		func: (x) => math.combinations(2 * x, x) / (x + 1),
